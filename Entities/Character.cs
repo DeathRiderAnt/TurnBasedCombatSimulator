@@ -16,4 +16,11 @@ public abstract class Character
         int damage = Math.Max(0, amount - Defence);
         CurrentHealth -= damage;
     }
+
+    public void Heal(int amount)
+    {
+        if (amount <= 0) return;
+
+        CurrentHealth = Math.Min(MaxHealth, CurrentHealth + amount);
+    }
 }
