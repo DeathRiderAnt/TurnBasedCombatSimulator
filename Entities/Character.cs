@@ -1,3 +1,6 @@
+using TurnBasedCombatSimulator.Skills;
+using TurnBasedCombatSimulator.StatusEffects;
+
 namespace TurnBasedCombatSimulator.Entities;
 
 public abstract class Character
@@ -11,9 +14,11 @@ public abstract class Character
 
     public bool IsAlive => CurrentHealth > 0;
 
-    protected Character(string name)
+    protected Character(string name, int maxHealth)
     {
         Name = name;
+        MaxHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
 
     public void TakeDamage(int amount)
@@ -27,5 +32,20 @@ public abstract class Character
         if (amount <= 0) return;
 
         CurrentHealth = Math.Min(MaxHealth, CurrentHealth + amount);
+    }
+
+    private readonly List<StatusEffect> _statusEffects = new();
+
+    public void AddStatusEffect(StatusEffect effect)
+    {
+        _statusEffects.Add(effect);
+    }
+
+    public void ApplyStartOfTurnEffects()
+    {
+        foreach (var effect in _statusEffects)
+        {
+            effect.Apply(this);
+        }
     }
 }

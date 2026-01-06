@@ -6,13 +6,9 @@ namespace TurnBasedCombatSimulator.Entities;
 public class Player : Character
 {
     public List<Item> Inventory {get;} = new();
-    public List<Skill> Skills {get;} = new();
 
-    public Player(string name):base(name)
+    public Player(string name):base(name, maxHealth: 100)
     {
-        Name = name;
-        MaxHealth = 100;
-        CurrentHealth = MaxHealth;
         Attack = 15;
         Defence = 5;
         Speed = 10;

@@ -16,6 +16,7 @@ public class BattleManager
     public void StartBattle()
     {
         Console.WriteLine("Battle Start!");
+        Console.WriteLine($"Player HP: {_player.CurrentHealth}, Enemy HP: {_enemy.CurrentHealth}");
 
         while (_player.IsAlive && _enemy.IsAlive)
         {
@@ -27,13 +28,19 @@ public class BattleManager
 
     private void ExecuteTurn()
     {
-        _enemy.TakeDamage(_player.Attack);
+        _player.ApplyStartOfTurnEffects();
+        _enemy.ApplyStartOfTurnEffects();
+
         Console.WriteLine($"{_player.Name} attacks {_enemy.Name}");
+        _enemy.TakeDamage(_player.Attack);
 
         if (_enemy.IsAlive)
         {
-            _player.TakeDamage(_enemy.Attack);
             Console.WriteLine($"{_enemy.Name} attacks {_player.Name}");
+            _player.TakeDamage(_enemy.Attack);
         }
+
+        Console.WriteLine($"Player HP: {_player.CurrentHealth}, Enemy HP: {_enemy.CurrentHealth}");
+
     }
 }
