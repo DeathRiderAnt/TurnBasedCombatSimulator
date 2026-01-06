@@ -8,7 +8,7 @@ public class Player : Character
     public List<Item> Inventory {get;} = new();
     public List<Skill> Skills {get;} = new();
 
-    public Player(string name)
+    public Player(string name):base(name)
     {
         Name = name;
         MaxHealth = 100;

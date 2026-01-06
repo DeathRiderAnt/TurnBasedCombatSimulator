@@ -2,7 +2,7 @@ namespace TurnBasedCombatSimulator.Entities;
 
 public class Enemy : Character
 {
-    public Enemy(string name)
+    public Enemy(string name):base(name)
     {
         Name = name;
         MaxHealth = 80;

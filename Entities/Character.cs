@@ -11,6 +11,11 @@ public abstract class Character
 
     public bool IsAlive => CurrentHealth > 0;
 
+    protected Character(string name)
+    {
+        Name = name;
+    }
+
     public void TakeDamage(int amount)
     {
         int damage = Math.Max(0, amount - Defence);
